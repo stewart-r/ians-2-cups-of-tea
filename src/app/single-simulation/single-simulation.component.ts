@@ -15,8 +15,21 @@ export class SingleSimulationComponent implements OnInit {
 
   state: SimulationInit = defaultInit;
 
+  simulationInProgress=false;
+
   changed(event: SimulationInit){
-    this.state = event;
+    console.log(event);
+    if (event.initialState && event.noOfCups) {
+      this.state = {
+        initialState: event.initialState,
+        noOfCups: event.noOfCups
+      };
+    }
+
+  }
+
+  simulationStarted(event: SimulationInit) {
+    console.log(event);
   }
 
   ngOnInit(): void {

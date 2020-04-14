@@ -23,7 +23,6 @@ export class CupsComponent implements OnInit {
     let ret:Array<ICup> = Array.from(Array(this.noOfCups)).map(_ =>  {
       return {state: "empty"};
     });
-    console.log(ret);
     return ret;
   }
 

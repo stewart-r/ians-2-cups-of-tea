@@ -20,8 +20,14 @@ export class ParamsComponent implements OnInit {
   @Input()
   state: SimulationInit = defaultInit;
 
+  @Input()
+  simulationInProgress = false;
+
   @Output()
   change = new EventEmitter<SimulationInit>()
+
+  @Output()
+  simulationStart = new EventEmitter<SimulationInit>();
 
   allStates = [
     new Option('double', "Double on Top"),
@@ -31,9 +37,12 @@ export class ParamsComponent implements OnInit {
   ]
 
   simulation(): void {
+    this.simulationInProgress = true;
+    this.simulationStart.emit(this.state);
   }
 
-  changed(): void {
+  changed(event: any): void {
+    console.log(event);
     console.log(this.state);
     this.change.emit(this.state);
   }

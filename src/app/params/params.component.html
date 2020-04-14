@@ -1,15 +1,15 @@
 <div class="vertical-container">
     <div class="container">
         <label for='number'>How many cups of tea?</label>
-        <input class="form-control" id='number' name='number' type="number" min=1 max=5 step=1 [(ngModel)]="state.noOfCups" (ngModelChange)="changed()"/>
+        <input class="form-control" id='number' name='number' type="number" min=1 max=5 step=1 [(ngModel)]="state.noOfCups" (ngModelChange)="changed($event)"/>
     </div>
     <div class="container">
         <label for='init-state'>Initial State: </label>
-        <select class="form-control" id="init-state" [(ngModel)]="state.initialState" (ngModelChange)="changed()">
+        <select class="form-control" id="init-state" [(ngModel)]="state.initialState" (ngModelChange)="changed($event)">
             <option *ngFor="let s of allStates" [value]="s.value" >{{s.display}}</option>
         </select>
     </div>
     <div class="btn-container">
-        <button (click)='simulation()'>Run Simulation</button>
+        <button type="button" (click)='simulation()'>Run Simulation</button>
     </div>
 </div>

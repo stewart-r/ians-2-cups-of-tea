@@ -29,7 +29,6 @@ export class CupComponent implements OnInit {
     const width = this.canvas.nativeElement.width / 2;
     const offset = width / 2;
     this.gap = this.canvas.nativeElement.width / 16;
-    console.log(this.gap);
     this.ctx.closePath();
     this.ctx.beginPath();
     this.ctx.lineWidth = this.gap / 6;
