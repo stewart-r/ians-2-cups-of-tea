@@ -27,10 +27,20 @@ export class CupComponent implements OnInit {
     this.ctx.clearRect(0,0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
     const height = this.canvas.nativeElement.height * 0.75;
     const width = this.canvas.nativeElement.width / 2;
+    const offset = width / 2;
+    this.gap = this.canvas.nativeElement.width / 16;
+    console.log(this.gap);
     this.ctx.closePath();
     this.ctx.beginPath();
-    this.ctx.moveTo(this.gap, this.gap);
-    this.ctx.lineTo(this.gap * 2, this.gap + height);
+    this.ctx.lineWidth = this.gap / 6;
+    this.ctx.moveTo(offset + this.gap, this.gap);
+    this.ctx.lineTo(offset + this.gap * 2, this.gap + height);
+    this.ctx.lineTo(offset + width - this.gap * 2, this.gap + height);
+    this.ctx.lineTo(offset + width - this.gap, this.gap);
+    this.ctx.moveTo(offset + width - this.gap * 1.2, this.gap + 0.25 * height)
+    this.ctx.lineTo(offset + width - this.gap * 0.2, this.gap + 0.25 * height)
+    this.ctx.lineTo(offset + width - this.gap * 0.2, this.gap + 0.6 * height)
+    this.ctx.lineTo(offset + width - this.gap * 1.6, this.gap + 0.6 * height)
     this.ctx.stroke();
   }
 

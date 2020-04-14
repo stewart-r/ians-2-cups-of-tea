@@ -16,6 +16,9 @@ export class CupsComponent implements OnInit {
   @Input()
   noOfCups: number;
 
+  @Input()
+  width: number;
+
   getCups(): Array<ICup> {
     let ret:Array<ICup> = Array.from(Array(this.noOfCups)).map(_ =>  {
       return {state: "empty"};

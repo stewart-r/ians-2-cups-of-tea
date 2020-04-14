@@ -1,6 +1,3 @@
-<div class="container">
-    
-    <div *ngFor="let cup of getCups()">
-        <app-cup [cup]="cup"></app-cup>
-    </div>
+<div class="container" [style.height.px]="width / 2">
+    <app-cup [cup]="cup" *ngFor="let cup of getCups()"></app-cup>
 </div>
