@@ -1,0 +1,24 @@
+.vertical-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding-top: 20px;
+}
+
+.container {    
+    width: 100%;
+    padding: 8px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.container > label {
+    vertical-align: bottom;
+}
+
+.btn-container {
+    padding: 20px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row-reverse;
+}

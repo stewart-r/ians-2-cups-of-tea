@@ -1,8 +1,48 @@
 
 <div class="container">
-    <div class="tea-tin">
+    <div>
         <h1>Ian's Puzzle</h1>
-        <app-tea-tin [state]="'singles'"  ></app-tea-tin>
+        <div class="quote">
+            <p>"I make 2 cups of tea and take one up to my wife. Some would say the luckiest woman in the world, but that’s another story.</p>
+            <p>I take the teabags from the box of Yorkshire Tea. The box is on a shelf and its first thing in the morning so I’m not going to get the box down and look in it; I’m not stupid!  I just reach in randomly and get a teabag. As everyone knows, Yorkshire Tea teabags come in pairs, so if you are making one cup of tea and you pick up a pair you have to split the teabags to use one and put the other back. If I am making two cups of tea and I dip into the box and pull out a double I think ‘today is going to be a great day’. Sometimes I dip in and get one teabag, then dip again and get 2! Aaahhgggh! I might as well go back to bed! I randomly pick a side of the box to get a teabag from.</p>
+            <p>The current box is about half way down and given we have a family of 5 and they are all home at present making random cups of tea for one or more, the box has settled into a steady expected state. There could be a double on the top. There could be a double one side and a single sat on top on the other. There could be 2 singles because someone picked a double from one side under the single the other, then made a single cup of tea then returned the single. When they do this, weirdly they always put the single back in the gap making 2 singles, not a growing pile of singles.</p>
+            <p>What is the chance of me having a great day?"</p>
+        </div>
+        <div>
+            <h3>
+                Tea Tin State
+            </h3>
+            <p>There are four possible states the tin could be in when Ian begins the process of making the morning tea:</p>
+            <div class="container">
+                <div class="item">
+                    <app-tea-tin [state]="'double'" [width]='width' ></app-tea-tin>
+                </div>
+                <div class="item">
+                    <app-tea-tin [state]="'singles'" [width]='width' ></app-tea-tin>
+                </div>
+                <div class="item">
+                    <app-tea-tin [state]="'left'" [width]='width' ></app-tea-tin>
+                </div>
+                <div class="item">
+                    <app-tea-tin [state]="'right'" [width]='width' ></app-tea-tin>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h3>
+                Modelling Tea-making events
+            </h3>
+            <p>Given that there are 5 members of the Harris-household, and given that currenly guests are outlawed, we can safely assume that a tea making event needs between 1 and 5 teabags.</p>
+            <p>Ian also tells us that (because of his assertion that he's <i>not stupid</i>) a side is picked at random so we can assume that each 'dip' into the tin is random and not dependant on the results of any other 'dip' into the tin.</p>
+            <h4>
+                Simulation
+            </h4>
+            <p>
+                We can simulate a single tea making event (choosing a side for each dip into the tin at random) as follows:
+            </p>
+            <app-single-simulation [width]="width"></app-single-simulation>
+        </div>
+        
     </div>
     
 </div>

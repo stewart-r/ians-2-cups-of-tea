@@ -9,6 +9,8 @@ export class LayoutComponent implements OnInit {
 
   constructor() { }
 
+  width=300;
+
   ngOnInit(): void {
   }
 
