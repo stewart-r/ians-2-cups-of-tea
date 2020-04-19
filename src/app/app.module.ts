@@ -9,6 +9,7 @@ import { ParamsComponent } from './params/params.component';
 import { CupsComponent } from './cups/cups.component';
 import { SingleSimulationComponent } from './single-simulation/single-simulation.component';
 import { CupComponent } from './cup/cup.component';
+import { OutcomeRowComponent } from './outcome-row/outcome-row.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CupComponent } from './cup/cup.component';
     ParamsComponent,
     CupsComponent,
     SingleSimulationComponent,
-    CupComponent
+    CupComponent,
+    OutcomeRowComponent
   ],
   imports: [
     BrowserModule,

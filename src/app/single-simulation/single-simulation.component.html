@@ -1,10 +1,12 @@
 
 <div class="container">
-    <div class="item params" [style.width.px] = 'width'>
+    <div class="item params" [style.width.px] = 'width' *ngIf="changeEnabled">
         <app-params 
             (change)="changed" 
             (simulationStart)="simulationStarted($event)"
-            [simulationInProgress]="simulationInProgress">
+            [simulationInProgress]="simulationInProgress"
+            [simEnabled]="simEnabled"
+            [state]="state">
         </app-params>
     </div>
     <div class="item">
@@ -13,9 +15,11 @@
                 [state]="state.initialState" 
                 [width]='width' >
             </app-tea-tin>
-            <app-cups 
+            <app-cups *ngIf="state.noOfCups"
                 [width]='width' 
                 [noOfCups]="state.noOfCups" 
+                [noOfCupsFilledAlready]="noOfCupsFilledAlready"
+                [noOfBagsInTransition]="noOfBagsInTransition()"
                 [style.width.px] = 'width * 1.5' 
                 [style.height.px]="width / 2" >
             </app-cups>

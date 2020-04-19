@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StateModellerService } from '../state-modeller.service';
 
 @Component({
   selector: 'app-layout',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutComponent implements OnInit {
 
-  constructor() { }
+  constructor(private stateModeller: StateModellerService) { }
 
   width=300;
+
+  getState(code){
+    console.log(code);
+    return this.stateModeller.generate(code);
+  }
 
   ngOnInit(): void {
   }

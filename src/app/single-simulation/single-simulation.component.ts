@@ -1,24 +1,63 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { SimulationInit, defaultInit } from '../initial-state';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { SimulationState, BagPickerService } from '../bag-picker.service';
+import { MetronomeService } from '../metronome.service';
+import { timer, Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
+import { StateModellerService } from '../state-modeller.service';
 
 @Component({
   selector: 'app-single-simulation',
   templateUrl: './single-simulation.component.html',
   styleUrls: ['./single-simulation.component.css']
 })
-export class SingleSimulationComponent implements OnInit {
+export class SingleSimulationComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  constructor(
+    private bagPickerService: BagPickerService,
+    private metronome: MetronomeService,
+    private stateModeller: StateModellerService
+  ) { }
 
   @Input()
   width;
 
-  state: SimulationInit = defaultInit;
+  @Input()
+  simEnabled=true;
+
+  @Input()
+  state: SimulationState = this.stateModeller.generate();
+
+  @Input()
+  changeEnabled = true;
+
+  transitionState: "left" | "right" | false = false;
+
+  noOfCupsFilledAlready=0;
 
   simulationInProgress=false;
 
-  changed(event: SimulationInit){
-    console.log(event);
+  noOfBagsInTransition() {
+    if (this.simulationInProgress) {
+      if (this.state.initialState === 'double') {
+        return 2;
+      } else if (this.state.initialState === 'singles') {
+        return 1;
+      } else if (this.state.initialState === this.transitionState) {
+        return 1;
+      } else {
+        return 2;
+      }
+    }
+    else {
+       return 0;
+     }
+
+     
+  }
+
+
+
+  changed(event: SimulationState){
     if (event.initialState && event.noOfCups) {
       this.state = {
         initialState: event.initialState,
@@ -28,11 +67,67 @@ export class SingleSimulationComponent implements OnInit {
 
   }
 
-  simulationStarted(event: SimulationInit) {
-    console.log(event);
+  frameSubscription: Subscription;
+  originalFrameIdx: number;
+
+  frameRate = 6;
+
+  transition() {
+    if (Math.random() > 0.5) {
+      this.transitionState = "left"   
+    } else {
+      this.transitionState = "right"
+    }
+  }
+
+  nextFrame(event:number) {
+    console.log(this.transitionState);
+    if (this.transitionState) {
+      const pick = this.bagPickerService.pick(this.state, 'left');
+      const nextState: SimulationState = pick[Math.floor(Math.random() * pick.length)];
+      this.noOfCupsFilledAlready += this.noOfBagsInTransition();
+      this.state = nextState;
+      if (this.state.noOfCups === 0) {
+        this.frameSubscription.unsubscribe();
+        this.frameSubscription = null;
+      }
+      this.transitionState = false;
+      this.simulationInProgress = false;
+    }
+    else {
+      this.transition();
+    }
+  }
+
+  simulationStarted(event: SimulationState) {
+    this.simulationInProgress = true;
+    
+    this.frameSubscription = this.metronome.ticks.subscribe(tick => {
+      if (this.originalFrameIdx) {
+        this.frameSubscription.unsubscribe();
+        this.frameSubscription = this.metronome
+          .ticks
+          .pipe(filter(n => {
+            return (n % this.frameRate) === (this.originalFrameIdx % this.frameRate) 
+          }))
+          .subscribe(e => this.nextFrame(e))
+      } else {
+        this.originalFrameIdx = tick;
+      }
+    })
+    
+    
+  
   }
 
   ngOnInit(): void {
+    
+  }
+
+  ngOnDestroy(): void {
+    if (this.frameSubscription && !this.frameSubscription.closed) {
+      this.frameSubscription.unsubscribe();
+    }
   }
 
 }

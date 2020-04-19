@@ -1,3 +1,13 @@
+<!-- <div>
+    in transit: {{noOfBagsInTransition}}
+</div>
+<div>
+    filled: {{noOfCupsFilledAlready}}
+</div>
+<div>
+    noOfCups: {{noOfCups}}
+</div> -->
+
 <div class="container" [style.height.px]="width / 2">
     <app-cup [cup]="cup" *ngFor="let cup of getCups()"></app-cup>
 </div>

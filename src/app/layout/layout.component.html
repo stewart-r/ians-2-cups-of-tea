@@ -38,9 +38,30 @@
                 Simulation
             </h4>
             <p>
-                We can simulate a single tea making event (choosing a side for each dip into the tin at random) as follows:
+                We can simulate a single tea making event (choosing a side for each dip into the tin at random) as follows.
             </p>
-            <app-single-simulation [width]="width"></app-single-simulation>
+            <p>
+                For any tea making event we have an initial state based on the Tea Tin state and the number of cups of tea we are making:
+            </p>
+            <app-single-simulation [width]="width" [simEnabled]='false' ></app-single-simulation>
+            <h5>
+                'Dips' into the tea tin
+            </h5>
+            <p>
+                We proceed to dip into the tea tin until we have filled each cup with a bag, we can therefore consider each 'dip' into the tin as transforming our initial state into a new state. For example, if we start with double on top and want to make 4 cups of tea then we start here:
+            </p>
+            <app-single-simulation [width]="width/2" [simEnabled]='false' [changeEnabled]='false' [state]="getState('d4')"></app-single-simulation>
+            <p> Then in our first 'dip' we take the double on top, make 2 cups of tea and end up here:</p>
+            <app-single-simulation [width]="width/2" [simEnabled]='false' [changeEnabled]='false' [state]="getState('d2')"></app-single-simulation>
+            <p> Finally, we take another double off the top and our final result is here:</p>
+            <app-single-simulation [width]="width/2" [simEnabled]='false' [changeEnabled]='false' [state]="getState('d0')"></app-single-simulation>
+
+            <h5>More complicated scenarios</h5>
+            <p>Of course, not every dip into the tea-tin is deterministic in it's outcome. If we consider this initial state:</p>
+            <app-single-simulation [width]="width/2" [simEnabled]='false' [changeEnabled]='false' [state]="getState('l1')"></app-single-simulation>
+            <p>Then we have 2 possible outcomes, each with 0.5 probability, depending on whether we dip into the tin at the left or the right (if we dip in on the right then we grab a double but put the spare bag back on the right):</p>
+            <app-single-simulation [width]="width/2" [simEnabled]='false' [changeEnabled]='false' [state]="getState('d0')"></app-single-simulation>
+            <app-single-simulation [width]="width/2" [simEnabled]='false' [changeEnabled]='false' [state]="getState('s0')"></app-single-simulation>
         </div>
         
     </div>

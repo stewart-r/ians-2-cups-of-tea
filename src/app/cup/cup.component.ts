@@ -14,8 +14,18 @@ export class CupComponent implements OnInit {
   @ViewChild('cup', { static: true }) 
   canvas: ElementRef<HTMLCanvasElement>;
 
+  _cup: ICup;
+
   @Input()
-  cup: ICup;
+  set cup(value: ICup) {
+    this._cup = value;
+    if (this.ctx) {
+      this.drawCup();
+    }
+  };
+  get cup():ICup {
+    return this._cup;
+  }
 
   gap = 20;
 
@@ -25,12 +35,14 @@ export class CupComponent implements OnInit {
   }
   drawCup() {
     this.ctx.clearRect(0,0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
+    
     const height = this.canvas.nativeElement.height * 0.75;
     const width = this.canvas.nativeElement.width / 2;
     const offset = width / 2;
     this.gap = this.canvas.nativeElement.width / 16;
     this.ctx.closePath();
     this.ctx.beginPath();
+    
     this.ctx.lineWidth = this.gap / 6;
     this.ctx.moveTo(offset + this.gap, this.gap);
     this.ctx.lineTo(offset + this.gap * 2, this.gap + height);
@@ -41,6 +53,16 @@ export class CupComponent implements OnInit {
     this.ctx.lineTo(offset + width - this.gap * 0.2, this.gap + 0.6 * height)
     this.ctx.lineTo(offset + width - this.gap * 1.6, this.gap + 0.6 * height)
     this.ctx.stroke();
+    if (this._cup.state !== 'empty') {
+      this.ctx.closePath();
+      this.ctx.beginPath();
+      if (this._cup.state === 'highlight') {
+        this.ctx.strokeStyle = 'red';
+      }
+      this.ctx.moveTo(offset + this.gap * 2.5, height);
+      this.ctx.lineTo(offset + width - this.gap * 2.5, height);
+      this.ctx.stroke();
+    }
   }
 
 

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { SimulationInit, defaultInit } from '../initial-state';
+import { SimulationState } from '../bag-picker.service';
+import { StateModellerService } from '../state-modeller.service';
 
 export class Option {
   constructor(
@@ -15,19 +16,27 @@ export class Option {
 })
 export class ParamsComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private stateModellerSvc: StateModellerService
+  ) { }
   
   @Input()
-  state: SimulationInit = defaultInit;
+  state: SimulationState;
 
   @Input()
   simulationInProgress = false;
 
-  @Output()
-  change = new EventEmitter<SimulationInit>()
+  @Input()
+  simEnabled = true;
+
+  @Input()
+  changeEnabled=true;
 
   @Output()
-  simulationStart = new EventEmitter<SimulationInit>();
+  change = new EventEmitter<SimulationState>()
+
+  @Output()
+  simulationStart = new EventEmitter<SimulationState>();
 
   allStates = [
     new Option('double', "Double on Top"),
@@ -42,8 +51,6 @@ export class ParamsComponent implements OnInit {
   }
 
   changed(event: any): void {
-    console.log(event);
-    console.log(this.state);
     this.change.emit(this.state);
   }
 
