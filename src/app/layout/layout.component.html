@@ -117,6 +117,17 @@
                 </ol>
                 <app-multi-tea-rounds [showHistory]="false" [baseWidth]="width * 1.5" [probabilityDistributions]="[[0.2,0.2,0.2,0.2,0.2]]">
                 </app-multi-tea-rounds>
+            <p>
+                In the absence of any other information assuming the probability of any number of cups between 1 and 5 seems reasonable, but we can model any possible probability distribution in the same way.
+            </p>
+            <p>As an example, maybe the adults nearly always have a tea when offered but the kids more rarely do. In which case we might have a probability distribution more like this:
+            </p>
+            <app-pd-table [distribution]="[0.05,0.5,0.25,0.15,0.05]"></app-pd-table>
+            <p>
+                Which behaves a little differently:
+            </p>
+            <app-multi-tea-rounds [showHistory]="false" [baseWidth]="width * 1.5" [probabilityDistributions]="[[0.05,0.5,0.25,0.15,0.05]]">
+            </app-multi-tea-rounds>
         </div>
         <div>
             <h3>
@@ -132,7 +143,7 @@
                 <li>We want the probability on the 8th day after the box has settled down into a 'steady state' </li>
             </ol>
             <p>
-                In terms of our calculator, this is equivalent to adding 5 rounds with the probability distribution shown above then adding a 6th representing Ian's morning round with the following probability distribution:
+                In terms of our calculator, this is equivalent to adding 5 rounds with the uniform probability distribution shown above then adding a 6th representing Ian's morning round with the following probability distribution:
             </p>
             <app-pd-table [distribution]=[0,1,0,0,0]></app-pd-table>
             <p>
