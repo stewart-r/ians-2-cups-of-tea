@@ -12,6 +12,7 @@ import { OutcomeRowComponent } from './outcome-row/outcome-row.component';
 import { TeaRoundComponent } from './tea-round/tea-round.component';
 import { ParamsMultiComponent } from './params-multi/params-multi.component';
 import { MultiTeaRoundsComponent } from './multi-tea-rounds/multi-tea-rounds.component';
+import { PdTableComponent } from './pd-table/pd-table.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { MultiTeaRoundsComponent } from './multi-tea-rounds/multi-tea-rounds.com
     CupsComponent,
     CupComponent,
     OutcomeRowComponent,    
-    TeaRoundComponent, ParamsMultiComponent, MultiTeaRoundsComponent
+    TeaRoundComponent, ParamsMultiComponent, MultiTeaRoundsComponent, PdTableComponent
   ],
   imports: [
     BrowserModule,

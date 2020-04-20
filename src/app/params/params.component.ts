@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SimulationState } from '../bag-picker.service';
 import { StateModellerService } from '../state-modeller.service';
+import { GaService } from '../ga.service';
 
 export class Option {
   constructor(
@@ -17,7 +18,8 @@ export class Option {
 export class ParamsComponent implements OnInit {
 
   constructor(
-    private stateModellerSvc: StateModellerService
+    private stateModellerSvc: StateModellerService,
+    private ga: GaService
   ) { }
   
   @Input()
@@ -51,6 +53,7 @@ export class ParamsComponent implements OnInit {
   }
 
   changed(event: any): void {
+    this.ga.sendEvent("Change State", "Edit", JSON.stringify(this.state));
     this.change.emit(this.state);
   }
 

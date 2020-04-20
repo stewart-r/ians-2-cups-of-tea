@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SimulationState, BagPickerService } from '../bag-picker.service';
+import { GaService } from '../ga.service';
 
 export interface IRow {
   states: SimulationState[],
@@ -14,7 +15,8 @@ export interface IRow {
 export class TeaRoundComponent implements OnInit {
 
   constructor(
-    private bagPicker: BagPickerService
+    private bagPicker: BagPickerService,
+    private ga: GaService
   ) { }
 
   @Input()
@@ -53,6 +55,12 @@ export class TeaRoundComponent implements OnInit {
       idx++;
     }
     return ret;
+  }
+
+  toggleShowDetails() {
+    let eventName = this.showDetails ? "Hide Details" : "Show Details";
+    this.ga.sendEvent(eventName, "Button Click", `${this.states().length}`)
+    this.showDetails = !this.showDetails;
   }
 
   

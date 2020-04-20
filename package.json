@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build",    
+    "publish": "ng build --prod --output-path docs --base-href /ians-2-cups-of-tea/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

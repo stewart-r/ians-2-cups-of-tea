@@ -14,6 +14,18 @@ export class OutcomeRowComponent implements OnInit {
   @Input()
   states: SimulationState[];
 
+  statesSorted() {
+    return this.states.sort((a,b) => {
+      if (a.initialState < b.initialState) {
+        return -1;
+      } else if (a.initialState > b.initialState) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  }
+
   @Input()
   width;
   

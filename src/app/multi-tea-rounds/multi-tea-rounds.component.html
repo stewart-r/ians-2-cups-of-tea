@@ -3,20 +3,23 @@
         <div>
             No of previous rounds: {{history.length}}
         </div>
-        <div>
+        <div *ngIf="showHistory">
             History: {{historyString()}}
         </div>
         <div>
             <button  type="button" (click)='reset()'>Reset</button>
         </div>
-        <div class="buttons">
+        <div class="buttons" *ngIf="!probabilityDistributions.length">
             <button *ngFor="let i of [1,2,3,4,5]" type="button" (click)='addRound(i)'>Add {{i}} Cup Round</button>
-            <button  type="button" (click)='addRound("random")'>Add Random Round</button>
+        </div>
+        <div class="buttons" *ngIf="probabilityDistributions.length && probabilityDistributions.length < 5">
+            <button *ngFor="let d of probabilityDistributions" type="button" (click)='addRoundDistributed(d)'>Add Round With Distribution: {{d}}</button>
+        </div>
+        <div class="buttons" *ngIf="probabilityDistributions.length && probabilityDistributions.length >= 5">
+            <button type="button" (click)="addNextRound()" [disabled]="index >= probabilityDistributions.length - 1">Add Next Round</button>
+            <button type="button" (click)="advanceToEnd()" [disabled]="index >= probabilityDistributions.length - 1">Advance to End</button>
         </div>
         
     </div>
     <app-outcome-row [states]="states" [width]="baseWidth * 0.7"></app-outcome-row>
-</div>
-<div *ngFor="let d of debug">
-    {{d | json}}
 </div>

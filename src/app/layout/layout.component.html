@@ -1,7 +1,7 @@
 
 <div class="container">
     <div>
-        <h1>Ian's Puzzle</h1>
+        <h1>Ian's 2 Cups of Tea Puzzle</h1>
         <div class="quote">
             <p>"I make 2 cups of tea and take one up to my wife. Some would say the luckiest woman in the world, but that’s another story.</p>
             <p>I take the teabags from the box of Yorkshire Tea. The box is on a shelf and its first thing in the morning so I’m not going to get the box down and look in it; I’m not stupid!  I just reach in randomly and get a teabag. As everyone knows, Yorkshire Tea teabags come in pairs, so if you are making one cup of tea and you pick up a pair you have to split the teabags to use one and put the other back. If I am making two cups of tea and I dip into the box and pull out a double I think ‘today is going to be a great day’. Sometimes I dip in and get one teabag, then dip again and get 2! Aaahhgggh! I might as well go back to bed! I randomly pick a side of the box to get a teabag from.</p>
@@ -10,9 +10,9 @@
         </div>
         <div>
             <h3>
-                Tea Tin State
+                Tea Box State
             </h3>
-            <p>There are four possible states the tin could be in when Ian begins the process of making the morning tea:</p>
+            <p>There are four possible states the box could be in when Ian begins the process of making the morning tea:</p>
             <app-outcome-row [width]="width" [states]="[getState('d0'), getState('s0'),getState('l0'), getState('r0') ]"></app-outcome-row>
         </div>
         <div>
@@ -20,22 +20,22 @@
                 Modelling Tea-making events
             </h3>
             <p>Given that there are 5 members of the Harris-household, and given that currenly guests are outlawed, we can safely assume that a tea making event needs between 1 and 5 teabags.</p>
-            <p>Ian also tells us that (because of his assertion that he's <i>not stupid</i>) a side is picked at random so we can assume that each 'dip' into the tin is random and not dependant on the results of any other 'dip' into the tin.</p>
+            <p>Ian also tells us that (because of his assertion that he's <i>not stupid</i>) a side is picked at random so we can assume that each 'dip' into the box is random and not dependant on the results of any other 'dip' into the box.</p>
             <h4>
                 Simulation
             </h4>
             <p>
-                We can simulate a single tea making event (choosing a side for each dip into the tin at random) as follows.
-            </p>
-            <p>
-                For any tea making event we have an initial state based on the Tea Tin state and the number of cups of tea we are making. For example, if we want to make 3 cups of tea and the tea-tin has a double on top then our initial state is:
+                For any tea making event we have an initial state based on the Box state and the number of cups of tea we are making. We can represent this state in a diagram. For example, if we want to make 3 cups of tea and the box has a double on top then our initial state is:
             </p>
             <app-outcome-row [width]="width * 1.5" [states]="[getState('d3')]"></app-outcome-row>
+            <p>
+                We can simulate a single tea making event (choosing a side for each dip into the box at random) as follows.
+            </p>
             <h5>
-                'Dips' into the tea tin
+                'Dips' into the tea box
             </h5>
             <p>
-                We proceed to dip into the tea tin until we have filled each cup with a bag, we can therefore consider each 'dip' into the tin as transforming our initial state into a new state. For example, if we start with double on top and want to make 4 cups of tea then we start here:
+                We proceed to dip into the box until we have filled each cup with a bag, we can therefore consider each 'dip' into the box as transforming our initial state into a new state. For example, if we start with double on top and want to make 4 cups of tea then we start here:
             </p>
             <app-outcome-row [width]="width * 1.5" [states]="[getState('d4')]"></app-outcome-row>
             <p> Then in our first 'dip' we take the double on top, make 2 cups of tea and end up here:</p>
@@ -44,16 +44,16 @@
             <app-outcome-row [width]="width * 1.5" [states]="[getState('d0')]"></app-outcome-row>
 
             <h5>More complicated scenarios</h5>
-            <p>Of course, not every dip into the tea-tin is deterministic in it's outcome. If we consider this initial state:</p>
+            <p>Of course, not every dip into the box is deterministic in it's outcome. If we consider this initial state:</p>
             <app-outcome-row [width]="width * 1.5" [states]="[getState('l5')]"></app-outcome-row>
-            <p>Then we have 2 possible outcomes, each with 0.5 probability, depending on whether we dip into the tin at the left or the right:</p>
+            <p>Then we have 2 possible outcomes, each with 0.5 probability, depending on whether we dip into the box at the left or the right:</p>
             <app-outcome-row [width]="width * 1.5" [states]="[getState('d4'), getState('l3')]"></app-outcome-row>
         </div>
         <div>
             <h3>
                 Single Tea-Making Event Outcome Probability Calculator
             </h3>
-            <p>We can therefore build up a calculator of the outcome states for a given tea-making event by modelling a series of 'dips' into the tea-tin until we have enough tea bags.</p>
+            <p>We can therefore build up a calculator of the outcome states for a given tea-making event by modelling a series of 'dips' into the box until we have enough tea bags.</p>
             <div class="lh params">
                 <app-params class="params" [state]="opmState"></app-params>
             </div>
@@ -65,7 +65,7 @@
             <h3>
                 Multiple Tea-Making Event Outcome Probability Calculator
             </h3>
-            <p>By simply feeding results back in we can now use the probabilities generated above to model the probabilities of the tea-tin being in a certain state after multiple tea rounds</p>
+            <p>We can now use the probabilities generated above to model the probabilities of the box being in a certain state after multiple tea rounds. We simply take the output of one iteration and feed it into the next iteration.</p>
             <h5>
                 Worked Example
             </h5>
@@ -74,8 +74,8 @@
             <p>Using the calculator above we can see that after the 5-cup round we have this range of possibilities:</p>
             <app-outcome-row [width]="width" [states]="after5cup"></app-outcome-row>
 
-            <p>Now, if we take the left hand outcome, we can feed this back through the calculator for the subsequent 2-cup round but this time we multiply the output probabilities by 0.5 (the probability of arriving at the left hand output):</p>
-            <p>Possible outcomes after the 2-cup round if the initial 5-cup round resulted in a left-single at the top of the pile:</p>
+            <p>Now, if we take the left hand outcome, we can feed this back through the calculator for the subsequent 2-cup round but this time we multiply the output probabilities by 0.5 (the probability of arriving at the left hand output after the first round):</p>
+            <p>This gives us the possible outcomes after the 2-cup round <b>if</b> the initial 5-cup round resulted in a left-single at the top of the pile:</p>
             <app-outcome-row [width]="width" [states]="lhDemo"></app-outcome-row>
             <p>Repeating the exercise for the right-side outcome of the 5-cup round we have:</p>
             <app-outcome-row [width]="width" [states]="rhDemo"></app-outcome-row>
@@ -89,10 +89,67 @@
             
             <app-multi-tea-rounds [baseWidth]="width * 1.5">
             </app-multi-tea-rounds>
-        </div>
 
-        
-        
+            <h5>
+                Modelling a random distribution of different size tea-rounds 
+            </h5>
+            <p>
+                The calculator in the previous section has the capacity to model prescribed tea-rounds but what if we want to model a random distribution of tea round sizes? Rememeber Ian told us that: <span class="quote">"...we have a family of 5 and they are all home at present making random cups of tea for one or more..."</span>
+            </p>
+            <p>
+                Well, at the most basic level, we could just assume that any number of cups is equally likely. Or, more formally, assume the number of cups of tea in each tea-making event has the followng probability distribution:
+            </p>
+            <app-pd-table [distribution]=[0.2,0.2,0.2,0.2,0.2]></app-pd-table>
+            
+            <p>
+                We can incorporate this into our calculator as follows. At each iteration we:
+            </p>
+                <ol>
+                    <li>
+                        Calculate the probability distribution for each of the possible number of cups
+                    </li>
+                    <li>
+                        Multiply the resulting probabilities by the corresponding probability for that number of cups from the distribution
+                    </li>
+                    <li>
+                        Aggregate the results into a combined probability distribution
+                    </li>
+                </ol>
+                <app-multi-tea-rounds [showHistory]="false" [baseWidth]="width * 1.5" [probabilityDistributions]="[[0.2,0.2,0.2,0.2,0.2]]">
+                </app-multi-tea-rounds>
+        </div>
+        <div>
+            <h3>
+                So What's the Probability of Ian Having a Great Day?
+            </h3>
+            <p>
+                Well, it really depends on what he means by <span class="quote">"...we have a family of 5 and they are all home at present making random cups of tea for one or more..."</span> but we can make a couple of assumptions to help us model this. 
+            </p>
+            <p>Let's assume that:</p>
+            <ol>
+                <li>Every day there are 5 other tea-rounds on top of the morning round Ian makes for him and his "lucky" wife</li>
+                <li>Each of these other tea rounds has a number of cups modelled by the uniform probaility distribution shown above</li>
+                <li>We want the probability on the 8th day after the box has settled down into a 'steady state' </li>
+            </ol>
+            <p>
+                In terms of our calculator, this is equivalent to adding 5 rounds with the probability distribution shown above then adding a 6th representing Ian's morning round with the following probability distribution:
+            </p>
+            <app-pd-table [distribution]=[0,1,0,0,0]></app-pd-table>
+            <p>
+                We then repeat this pattern until just before the 8th morning run:
+            </p>
+            <app-multi-tea-rounds [showHistory]="false" [baseWidth]="width * 1.5" [probabilityDistributions]="mainSimDistros()">
+            </app-multi-tea-rounds>
+            <h5>
+                Results
+            </h5>
+            <p>If we advance the calculator above to the end we can see that when Ian makes his morning tea-round the box could be in each of the 4 states with the probabilites shown below</p>
+            <app-outcome-row [width]="width" [states]="final"></app-outcome-row>
+            <p>Clearly, whenever there is a double on top Ian is going to have a great day</p>
+            <p>If there is just 1 single on top he also has a 0.5 probability of having a great day.</p>
+            <p class="final-result">Therefore the probability of Ian having a great day is: 0.3971 + 0.5 * 0.25 + 0.5 * 0.25 = 0.6471</p>
+            <p>Ian has a bad day if he picks a single then a double. This happens with probability 0.5 whenever there is a single on top so this has an overall probability of 0.5 * (0.25 + 0.25 + 0.1029) = 0.30145</p>
+        </div>        
     </div>
     
 </div>

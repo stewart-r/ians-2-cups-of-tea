@@ -23,11 +23,19 @@
 
 .lh {
     display: flex;
-    
+
 }
 
 .params {
     background-color: #d6d6c6; 
     vertical-align: middle;
     height: 100%;
+}
+
+li {
+    margin:0;
+}
+
+.final-result {
+    font-weight: bold;
 }

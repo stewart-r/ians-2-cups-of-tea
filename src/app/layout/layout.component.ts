@@ -29,10 +29,33 @@ export class LayoutComponent implements OnInit {
     {noOfCups:0,initialState:'left', probability: 0.5 * 0.25},
     {noOfCups:0,initialState:'right', probability: 0.5 * 0.75},
   ]
+
+  final: SimulationState[] = [
+    {noOfCups:0,initialState:'double', probability: 0.3971},
+    {noOfCups:0,initialState:'right', probability: 0.25},
+    {noOfCups:0,initialState:'left', probability: 0.25},
+    {noOfCups:0,initialState:'singles', probability: 0.1029},
+  ];
   
 
   getState(code){
     return this.stateModeller.generate(code);
+  }
+
+  mainSimDistros() {
+    const ret: Array<Array<number>> = [];
+    const uniform = [0.2,0.2,0.2,0.2,0.2]
+    const morning = [0,1,0,0,0]
+    for (var i=0; i < 7; i++) {
+      for (var j=0; j < 5; j++) {
+        ret.push(uniform);
+      }
+      ret.push(morning);
+    }
+    for (var j=0; j < 5; j++) {
+      ret.push(uniform);
+    }
+    return ret;
   }
 
   ngOnInit(): void {

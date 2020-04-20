@@ -1,8 +1,8 @@
 <div class="container">
-    <div class="item" *ngFor="let state of states">
+    <div class="item" *ngFor="let state of statesSorted()">
         <div class="container-nested">
             <div *ngIf="state.probability" class="prob">
-                Probability: {{state.probability}}
+                Probability: {{state.probability | number: "1.0-4"}}
             </div>
             <div>
                 
