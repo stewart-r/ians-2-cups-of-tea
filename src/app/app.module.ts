@@ -7,9 +7,11 @@ import { LayoutComponent } from './layout/layout.component';
 import { TeaTinComponent } from './tea-tin/tea-tin.component';
 import { ParamsComponent } from './params/params.component';
 import { CupsComponent } from './cups/cups.component';
-import { SingleSimulationComponent } from './single-simulation/single-simulation.component';
 import { CupComponent } from './cup/cup.component';
 import { OutcomeRowComponent } from './outcome-row/outcome-row.component';
+import { TeaRoundComponent } from './tea-round/tea-round.component';
+import { ParamsMultiComponent } from './params-multi/params-multi.component';
+import { MultiTeaRoundsComponent } from './multi-tea-rounds/multi-tea-rounds.component';
 
 @NgModule({
   declarations: [
@@ -18,9 +20,9 @@ import { OutcomeRowComponent } from './outcome-row/outcome-row.component';
     TeaTinComponent,
     ParamsComponent,
     CupsComponent,
-    SingleSimulationComponent,
     CupComponent,
-    OutcomeRowComponent
+    OutcomeRowComponent,    
+    TeaRoundComponent, ParamsMultiComponent, MultiTeaRoundsComponent
   ],
   imports: [
     BrowserModule,

@@ -13,20 +13,7 @@
                 Tea Tin State
             </h3>
             <p>There are four possible states the tin could be in when Ian begins the process of making the morning tea:</p>
-            <div class="container">
-                <div class="item">
-                    <app-tea-tin [state]="'double'" [width]='width' ></app-tea-tin>
-                </div>
-                <div class="item">
-                    <app-tea-tin [state]="'singles'" [width]='width' ></app-tea-tin>
-                </div>
-                <div class="item">
-                    <app-tea-tin [state]="'left'" [width]='width' ></app-tea-tin>
-                </div>
-                <div class="item">
-                    <app-tea-tin [state]="'right'" [width]='width' ></app-tea-tin>
-                </div>
-            </div>
+            <app-outcome-row [width]="width" [states]="[getState('d0'), getState('s0'),getState('l0'), getState('r0') ]"></app-outcome-row>
         </div>
         <div>
             <h3>
@@ -41,28 +28,70 @@
                 We can simulate a single tea making event (choosing a side for each dip into the tin at random) as follows.
             </p>
             <p>
-                For any tea making event we have an initial state based on the Tea Tin state and the number of cups of tea we are making:
+                For any tea making event we have an initial state based on the Tea Tin state and the number of cups of tea we are making. For example, if we want to make 3 cups of tea and the tea-tin has a double on top then our initial state is:
             </p>
-            <app-single-simulation [width]="width" [simEnabled]='false' ></app-single-simulation>
+            <app-outcome-row [width]="width * 1.5" [states]="[getState('d3')]"></app-outcome-row>
             <h5>
                 'Dips' into the tea tin
             </h5>
             <p>
                 We proceed to dip into the tea tin until we have filled each cup with a bag, we can therefore consider each 'dip' into the tin as transforming our initial state into a new state. For example, if we start with double on top and want to make 4 cups of tea then we start here:
             </p>
-            <app-single-simulation [width]="width/2" [simEnabled]='false' [changeEnabled]='false' [state]="getState('d4')"></app-single-simulation>
+            <app-outcome-row [width]="width * 1.5" [states]="[getState('d4')]"></app-outcome-row>
             <p> Then in our first 'dip' we take the double on top, make 2 cups of tea and end up here:</p>
-            <app-single-simulation [width]="width/2" [simEnabled]='false' [changeEnabled]='false' [state]="getState('d2')"></app-single-simulation>
+            <app-outcome-row [width]="width * 1.5" [states]="[getState('d2')]"></app-outcome-row>
             <p> Finally, we take another double off the top and our final result is here:</p>
-            <app-single-simulation [width]="width/2" [simEnabled]='false' [changeEnabled]='false' [state]="getState('d0')"></app-single-simulation>
+            <app-outcome-row [width]="width * 1.5" [states]="[getState('d0')]"></app-outcome-row>
 
             <h5>More complicated scenarios</h5>
             <p>Of course, not every dip into the tea-tin is deterministic in it's outcome. If we consider this initial state:</p>
-            <app-single-simulation [width]="width/2" [simEnabled]='false' [changeEnabled]='false' [state]="getState('l1')"></app-single-simulation>
-            <p>Then we have 2 possible outcomes, each with 0.5 probability, depending on whether we dip into the tin at the left or the right (if we dip in on the right then we grab a double but put the spare bag back on the right):</p>
-            <app-single-simulation [width]="width/2" [simEnabled]='false' [changeEnabled]='false' [state]="getState('d0')"></app-single-simulation>
-            <app-single-simulation [width]="width/2" [simEnabled]='false' [changeEnabled]='false' [state]="getState('s0')"></app-single-simulation>
+            <app-outcome-row [width]="width * 1.5" [states]="[getState('l5')]"></app-outcome-row>
+            <p>Then we have 2 possible outcomes, each with 0.5 probability, depending on whether we dip into the tin at the left or the right:</p>
+            <app-outcome-row [width]="width * 1.5" [states]="[getState('d4'), getState('l3')]"></app-outcome-row>
         </div>
+        <div>
+            <h3>
+                Single Tea-Making Event Outcome Probability Calculator
+            </h3>
+            <p>We can therefore build up a calculator of the outcome states for a given tea-making event by modelling a series of 'dips' into the tea-tin until we have enough tea bags.</p>
+            <div class="lh params">
+                <app-params class="params" [state]="opmState"></app-params>
+            </div>
+            <app-tea-round [fromState]="opmState" [baseWidth]="width * 1.5">
+            </app-tea-round>
+        </div>
+
+        <div>
+            <h3>
+                Multiple Tea-Making Event Outcome Probability Calculator
+            </h3>
+            <p>By simply feeding results back in we can now use the probabilities generated above to model the probabilities of the tea-tin being in a certain state after multiple tea rounds</p>
+            <h5>
+                Worked Example
+            </h5>
+            <p>By way of an example, consider the case when we start with a double tea-bag on top of the pile then make a 5-cup round followed by a 2-cup round.</p>
+
+            <p>Using the calculator above we can see that after the 5-cup round we have this range of possibilities:</p>
+            <app-outcome-row [width]="width" [states]="after5cup"></app-outcome-row>
+
+            <p>Now, if we take the left hand outcome, we can feed this back through the calculator for the subsequent 2-cup round but this time we multiply the output probabilities by 0.5 (the probability of arriving at the left hand output):</p>
+            <p>Possible outcomes after the 2-cup round if the initial 5-cup round resulted in a left-single at the top of the pile:</p>
+            <app-outcome-row [width]="width" [states]="lhDemo"></app-outcome-row>
+            <p>Repeating the exercise for the right-side outcome of the 5-cup round we have:</p>
+            <app-outcome-row [width]="width" [states]="rhDemo"></app-outcome-row>
+            Therefore the combined probabilities after both rounds is:
+            <app-outcome-row [width]="width" [states]="after5cup"></app-outcome-row>
+            <h5>
+                Interactive calculator
+            </h5>
+            <p>By continuring to feed the outcomes back through the calculator we can build up a chain of these outcome probabilities representing the state of the pile of tea-bags after an arbitrary number of tea-making events. 
+            The following Interactive simulation starts with a full tea-bag pile and shows the probability distribution after an arbitrary number of rounds of tea.</p>
+            
+            <app-multi-tea-rounds [baseWidth]="width * 1.5">
+            </app-multi-tea-rounds>
+        </div>
+
+        
         
     </div>
     

@@ -27,6 +27,9 @@ export class CupComponent implements OnInit {
     return this._cup;
   }
 
+  @Input()
+  width:number;
+
   gap = 20;
 
   ngOnInit(): void {
@@ -34,16 +37,17 @@ export class CupComponent implements OnInit {
     this.drawCup();
   }
   drawCup() {
+    
     this.ctx.clearRect(0,0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
     
     const height = this.canvas.nativeElement.height * 0.75;
-    const width = this.canvas.nativeElement.width / 2;
+    const width = this.canvas.nativeElement.width / 1.5;
     const offset = width / 2;
     this.gap = this.canvas.nativeElement.width / 16;
     this.ctx.closePath();
     this.ctx.beginPath();
     
-    this.ctx.lineWidth = this.gap / 6;
+    this.ctx.lineWidth = this.gap / 3.5;
     this.ctx.moveTo(offset + this.gap, this.gap);
     this.ctx.lineTo(offset + this.gap * 2, this.gap + height);
     this.ctx.lineTo(offset + width - this.gap * 2, this.gap + height);

@@ -1,1 +1,18 @@
-<p>outcome-row works!</p>
+<div class="container">
+    <div class="item" *ngFor="let state of states">
+        <div class="container-nested">
+            <div *ngIf="state.probability" class="prob">
+                Probability: {{state.probability}}
+            </div>
+            <div>
+                
+                <app-tea-tin [state]="state.initialState" [width]="width/2"></app-tea-tin>
+                <div class="cups" >
+                    <app-cup *ngFor="let cup of cups(state.noOfCups)" [cup]="{state:'empty'}" [width]="width / 10"></app-cup>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SingleSimulationComponent } from './single-simulation.component';
+import { TeaRoundComponent } from './tea-round.component';
 
-describe('SingleSimulationComponent', () => {
-  let component: SingleSimulationComponent;
-  let fixture: ComponentFixture<SingleSimulationComponent>;
+describe('TeaRoundComponent', () => {
+  let component: TeaRoundComponent;
+  let fixture: ComponentFixture<TeaRoundComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SingleSimulationComponent ]
+      declarations: [ TeaRoundComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SingleSimulationComponent);
+    fixture = TestBed.createComponent(TeaRoundComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

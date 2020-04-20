@@ -21,22 +21,22 @@ export class CupsComponent implements OnInit, OnDestroy {
   noOfCups: number;
 
   @Input()
-  noOfCupsFilledAlready: number;
+  noOfCupsFilledAlready: number = 0;
 
-  _noOfBagsInTransition: 0|1|2;
+  _noOfBagsInTransition: 0|1|2 = 0;
 
   @Input()
   set noOfBagsInTransition( value: 0 | 1 | 2) {
     console.log(value);
     this._noOfBagsInTransition = value;
-    if (value === 0) {
-      if (this.metronomeSubscription){
-        this.metronomeSubscription.unsubscribe();
-      }
-      this.metronomeSubscription = null;
-    } else if (!this.metronomeSubscription){
-      this.metronomeSubscription = this.metronome.ticks.subscribe(this.metronomeTick);
-    }
+    // if (value === 0) {
+    //   if (this.metronomeSubscription){
+    //     this.metronomeSubscription.unsubscribe();
+    //   }
+    //   this.metronomeSubscription = null;
+    // } else if (!this.metronomeSubscription){
+    //   this.metronomeSubscription = this.metronome.ticks.subscribe(this.metronomeTick);
+    // }
   }
   get noOfBagsInTransition() {
     return this._noOfBagsInTransition;
@@ -66,7 +66,7 @@ export class CupsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    var subsription = this.metronome.ticks.subscribe(this.metronomeTick);
+    //var subsription = this.metronome.ticks.subscribe(this.metronomeTick);
   }
 
   ngOnDestroy(): void {

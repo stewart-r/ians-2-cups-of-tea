@@ -5,11 +5,11 @@
     align-items: center;
     flex-wrap: wrap-reverse;
     align-content: space-between;
-    padding-top: 15px;
+    padding-top: 5px;
 }
 
 .container > * {
-    padding-top: 10px;
+    padding-top: 5px;
     width: 30%;
     justify-content: center;
 }

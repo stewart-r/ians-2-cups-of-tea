@@ -1,0 +1,35 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 15px;
+}
+
+.item {
+    text-align: center;
+    background-color: #ccd;
+}
+.item > * {
+    text-align: center;
+}
+
+.container-nested {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.container-nested > * {
+    justify-content: center;
+}
+
+.cups {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.prob {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: small;
+}

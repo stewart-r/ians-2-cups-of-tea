@@ -1,0 +1,22 @@
+<div class="outer-container">
+    <div class="params">
+        <div>
+            No of previous rounds: {{history.length}}
+        </div>
+        <div>
+            History: {{historyString()}}
+        </div>
+        <div>
+            <button  type="button" (click)='reset()'>Reset</button>
+        </div>
+        <div class="buttons">
+            <button *ngFor="let i of [1,2,3,4,5]" type="button" (click)='addRound(i)'>Add {{i}} Cup Round</button>
+            <button  type="button" (click)='addRound("random")'>Add Random Round</button>
+        </div>
+        
+    </div>
+    <app-outcome-row [states]="states" [width]="baseWidth * 0.7"></app-outcome-row>
+</div>
+<div *ngFor="let d of debug">
+    {{d | json}}
+</div>

@@ -7,13 +7,13 @@ import { map } from 'rxjs/operators';
 })
 export class MetronomeService {
 
-  public ticks: Observable<number>;
+  //public ticks: Observable<number>;
 
-  constructor() {
-    const source = timer(500,500);
-    this.ticks = source.pipe(map((_, idx)=> {
-      return idx % 12;
-    }))
-  }
+  // constructor() {
+  //   const source = timer(5000,5000);
+  //   this.ticks = source.pipe(map((_, idx)=> {
+  //     return idx % 12;
+  //   }))
+  // }
 
 }

@@ -27,7 +27,7 @@ export class ParamsComponent implements OnInit {
   simulationInProgress = false;
 
   @Input()
-  simEnabled = true;
+  simEnabled = false;
 
   @Input()
   changeEnabled=true;

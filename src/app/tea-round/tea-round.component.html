@@ -1,0 +1,23 @@
+<div class="btn-container">
+    <button type="button" (click)='showDetails = !showDetails'><span *ngIf='!showDetails'>Show</span><span *ngIf='showDetails'>Hide</span> Details</button>
+</div>
+<div class="container" *ngIf="showDetails">
+
+    <div class="underline"></div>
+    <div *ngFor="let stateRow of states(); let i = index">
+        <div>
+            After {{i}} dips:
+        </div>
+        <app-outcome-row [states]="stateRow.states" [width]="baseWidth * 0.7"></app-outcome-row>
+        <div *ngIf="stateRow.consolodated">
+            or equivalently:
+        </div>
+        <app-outcome-row *ngIf="stateRow.consolodated" [states]="stateRow.consolodated" [width]="baseWidth * 0.7"></app-outcome-row>
+        <div class="underline">
+            
+        </div>
+    </div>
+</div>
+<div class="container" *ngIf="!showDetails">
+    <app-outcome-row [states]="lastRow()" [width]="baseWidth * 0.7"></app-outcome-row>
+</div>

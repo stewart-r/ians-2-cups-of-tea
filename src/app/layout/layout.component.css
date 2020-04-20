@@ -21,6 +21,11 @@
     text-align: center;
 }
 
+.lh {
+    display: flex;
+    
+}
+
 .params {
     background-color: #d6d6c6; 
     vertical-align: middle;

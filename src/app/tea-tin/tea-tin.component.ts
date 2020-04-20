@@ -44,7 +44,7 @@ export class TeaTinComponent implements OnInit {
       case "right":
         return "Right Single on Top";
       case "singles":
-        return "Singles on Top";
+        return "2 Singles on Top";
       case "double":
         return "Double on Top";
     }

@@ -3,3 +3,8 @@ canvas {
     height: 100%;
     width: 100%;
 }
+
+span {
+    font-weight: bold;
+    font-size: small;
+}
